@@ -56,6 +56,7 @@ RUN install2.r --error --skipinstalled --ncpus -1 \
 RUN R -e "devtools::install_github('sqjin/CellChat')"
 RUN R -e "devtools::install_github('satijalab/seurat-data')"
 RUN R -e "devtools::install_github('mojaveazure/seurat-disk')"
+RUN R -e "devtools::install_github('welch-lab/liger')"
 
 ## FROM BIOCONDUCTOR
 RUN R -e "BiocManager::install('BiocGenerics')"
