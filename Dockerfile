@@ -53,10 +53,9 @@ RUN install2.r --error --skipinstalled --ncpus -1 \
     Matrix
 
 ## FROM GITHUB
-RUN installGithub.r --error --skipinstalled --ncpus -1 \
-    sqjin/CellChat \
-    satijalab/seurat-data \
-    mojaveazure/seurat-disk
+RUN R -e "devtools::install_github('sqjin/CellChat')"
+RUN R -e "devtools::install_github('satijalab/seurat-data')"
+RUN R -e "devtools::install_github('mojaveazure/seurat-disk')"
 
 ## FROM BIOCONDUCTOR
 RUN R -e "BiocManager::install('BiocGenerics')"
