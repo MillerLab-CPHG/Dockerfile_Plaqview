@@ -74,11 +74,16 @@ RUN R -e "BiocManager::install('celldex')"
 RUN R -e "BiocManager::install('bayNorm')"
 
 #### SPECIFIC R PACKAGES
-## SPECIFIC FOR MONOCLE3
+## MONOCLE3
 RUN R -e "devtools::install_github('cole-trapnell-lab/leidenbase')"
 RUN R -e "devtools::install_github('cole-trapnell-lab/monocle3')"
 
-## SPECIFIC FOR ARCHR
+## ARCHR
 RUN R -e "devtools::install_github('GreenleafLab/ArchR', ref='master', repos = BiocManager::repositories())"
 RUN R "ArchR::installExtraPackages()"
 
+## CIPR
+RUN R -e "devtools::install_github('atakanekiz/CIPR-Package', build_vignettes = TRUE)"
+
+## SYMPHONY
+RUN R -e "devtools::install_github('immunogenomics/symphony')"
