@@ -1,4 +1,4 @@
-FROM rocker/rstudio:4.1.1
+FROM rocker/rstudio:latest
 
 
 #### ESSENTIAL UBUNTU PKGS ####
@@ -87,3 +87,9 @@ RUN R -e "devtools::install_github('atakanekiz/CIPR-Package', build_vignettes = 
 
 ## SYMPHONY
 RUN R -e "devtools::install_github('immunogenomics/symphony')"
+
+## DROPLETUTIL
+RUN R -e "BiocManager::install('DropletUtils')"
+
+## ENSEMBLE
+RUN R -e "BiocManager::install('ensembldb')"

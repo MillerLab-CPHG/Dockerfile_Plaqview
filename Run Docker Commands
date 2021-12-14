@@ -1,0 +1,23 @@
+#### cd to working directory
+My\ Drive/PlaqView_Master/Dockerfile_Rstudio_Plaqview
+
+#### build plaqview image
+# note the space and period!!!!
+docker build -t plaqviewmaster:latest # you can tag for versioning purposes
+docker build -t plaqviewmaster:12082021
+docker build -t plaqviewmaster:baserocker
+
+#### start Rocker/Plaqview container
+docker run -e DISABLE_AUTH=true --name currentsession -d -v /Users/wm5wt:/home/rstudio/Documents -p 8787:8787 plaqviewmaster:latestDec10
+
+docker run -e DISABLE_AUTH=true --name currentsession -d -v /Users/wm5wt:/home/rstudio/Documents -p 8787:8787 plaqviewmaster:latest
+
+##### other commands that are helpful #####
+# kill and rm all containers
+docker container rm -f $(docker ps -aq)
+
+# kill and rm all unsed and dangling images
+docker system prune -a
+
+# run base image (for testing only, not for plaqview)
+docker run -e DISABLE_AUTH=true --name testbaserocker -d -v /Users/wm5wt:/home/rstudio/Documents -p 1111:8787 plaqviewmaster:baserocker
