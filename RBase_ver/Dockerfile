@@ -1,4 +1,4 @@
-FROM rocker/rstudio:latest
+FROM rocker/r-base:latest
 
 
 #### ESSENTIAL UBUNTU PKGS ####
@@ -53,7 +53,7 @@ RUN install2.r --error --skipinstalled --ncpus -1 \
     Matrix
 
 ## FROM GITHUB
-RUN R -e "devtools::install_github('sqjin/CellChat')"
+# RUN R -e "devtools::install_github('sqjin/CellChat')"
 RUN R -e "devtools::install_github('satijalab/seurat-data')"
 RUN R -e "devtools::install_github('mojaveazure/seurat-disk')"
 RUN R -e "devtools::install_github('welch-lab/liger')"
@@ -78,10 +78,6 @@ RUN R -e "BiocManager::install('bayNorm')"
 RUN R -e "devtools::install_github('cole-trapnell-lab/leidenbase')"
 RUN R -e "devtools::install_github('cole-trapnell-lab/monocle3')"
 
-## ARCHR
-RUN R -e "devtools::install_github('GreenleafLab/ArchR', ref='master', repos = BiocManager::repositories())"
-RUN R "ArchR::installExtraPackages()"
-
 ## CIPR
 RUN R -e "devtools::install_github('atakanekiz/CIPR-Package', build_vignettes = TRUE)"
 
@@ -93,3 +89,11 @@ RUN R -e "BiocManager::install('DropletUtils')"
 
 ## ENSEMBLE
 RUN R -e "BiocManager::install('ensembldb')"
+
+## SingleCellExperiment (scater)
+RUN R -e "BiocManager::install('scater')"
+
+## ARCHR
+# ArchR is having some dependency problems...
+#RUN R -e "devtools::install_github('GreenleafLab/ArchR', ref='master', repos = BiocManager::repositories())"
+#RUN R -e "ArchR::installExtraPackages()"
