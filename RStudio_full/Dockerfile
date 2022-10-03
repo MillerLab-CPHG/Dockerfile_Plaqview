@@ -1,4 +1,4 @@
-FROM rocker/rstudio:latest
+FROM rocker/rstudio:4.1.2
 
 
 #### ESSENTIAL UBUNTU PKGS ####
@@ -82,9 +82,6 @@ RUN R -e "BiocManager::install('bayNorm')"
 RUN R -e "devtools::install_github('cole-trapnell-lab/leidenbase')"
 RUN R -e "devtools::install_github('cole-trapnell-lab/monocle3')"
 
-## CIPR
-RUN R -e "devtools::install_github('atakanekiz/CIPR-Package', build_vignettes = TRUE)"
-
 ## SYMPHONY
 RUN R -e "devtools::install_github('immunogenomics/symphony')"
 
@@ -113,14 +110,14 @@ RUN R -e "BiocManager::install(c('BSgenome.Mmusculus.UCSC.mm10', 'EnsDb.Mmusculu
 RUN R -e "BiocManager::install('Rhtslib')"
 RUN R -e "BiocManager::install('Rhtslib')"
 RUN R -e "BiocManager::install('motifmatchr')"
-RUN R -e "devtools::install_github('GreenleafLab/ArchR', ref='master', repos = BiocManager::repositories())"
+RUN R -e "devtools::install_github('GreenleafLab/ArchR', ref='release_1.0.2', repos = BiocManager::repositories())"
 RUN R -e "ArchR::installExtraPackages()"
 RUN R -e "install.packages('hexbin')"
 RUN R -e "install.packages('ggpubr')"
 RUN R -e "BiocManager::install('grimbough/rhdf5', ref = 'file_lock_issues')"
 
 ## CIPR
-RUN R -e "devtools::install_github('atakanekiz/CIPR-Package', build_vignettes = TRUE)"
+RUN R -e "devtools::install_github('atakanekiz/CIPR-Package', build_vignettes = F)"
 
 ## UPDATED DT
 RUN R -e "remotes::install_github('rstudio/DT')"
@@ -133,3 +130,13 @@ RUN R -e "devtools::install_github('glin/reactable')"
 
 ## magick (archr error fix)
 RUN R -e "install.packages('magick')"
+
+## cellchat
+RUN R -e "devtools::install_github('sqjin/CellChat')"
+
+# dependency for signac annotation
+RUN R -e "BiocManager::install('biovizBase')"
+
+# FigR multiominc analysis 
+RUN R -e "devtools::install_github('buenrostrolab/FigR')"
+

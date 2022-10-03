@@ -1,0 +1,12 @@
+version: '3.3'
+services:
+    plaqviewmaster:
+        environment:
+            - DISABLE_AUTH=true
+            - ROOT=true
+        container_name: dev
+        volumes:
+            - /Users/wm5wt/My\ Drive/:/home/rstudio/Documents
+        ports:
+            - '1000:8787'
+        image: 'plaqviewmaster:testing_archr_05122022' 

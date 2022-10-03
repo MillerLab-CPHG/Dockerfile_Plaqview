@@ -1,0 +1,12 @@
+version: '3.3'
+services:
+    plaqviewmaster:
+        environment:
+            - DISABLE_AUTH=true
+            - ROOT=true
+        container_name: atac-onedrive
+        volumes:
+            - /Volumes/One\ Touch/:/home/rstudio/Documents
+        ports:
+            - '1001:8787'
+        image: 'plaqviewmaster:testing_archr_05122022' 

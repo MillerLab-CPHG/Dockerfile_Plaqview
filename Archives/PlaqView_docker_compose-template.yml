@@ -1,0 +1,12 @@
+version: '3.3'
+services:
+    plaqviewmaster:
+        environment:
+            - DISABLE_AUTH=true
+            - ROOT=true
+        container_name: p1
+        volumes:
+            - /Volumes/One\
+        ports:
+            - '8787:8787'
+        image: 'wfma888/plaqviewmaster:testing_archr_05122022' 
