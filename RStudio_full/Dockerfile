@@ -1,5 +1,8 @@
-FROM rocker/rstudio:4.1.2
+FROM rocker/rstudio:4.2
 
+ARG BUILDDIR="/tmp/build"
+ARG PYTHON_VER="3.6.8"
+WORKDIR ${BUILDDIR}
 
 #### ESSENTIAL UBUNTU PKGS ####
 RUN apt-get update && apt-get install -y \
@@ -57,7 +60,6 @@ RUN install2.r --error --skipinstalled --ncpus -1 \
     Matrix
 
 ## FROM GITHUB
-# RUN R -e "devtools::install_github('sqjin/CellChat')"
 RUN R -e "devtools::install_github('satijalab/seurat-data')"
 RUN R -e "devtools::install_github('mojaveazure/seurat-disk')"
 RUN R -e "devtools::install_github('welch-lab/liger')"
@@ -106,30 +108,15 @@ RUN R -e "install.packages('Signac')"
 RUN R -e "BiocManager::install(c('BSgenome.Hsapiens.UCSC.hg38', 'EnsDb.Hsapiens.v86'))"
 RUN R -e "BiocManager::install(c('BSgenome.Mmusculus.UCSC.mm10', 'EnsDb.Mmusculus.v79'))"
 
-## Archr 
-RUN R -e "BiocManager::install('Rhtslib')"
-RUN R -e "BiocManager::install('Rhtslib')"
-RUN R -e "BiocManager::install('motifmatchr')"
-RUN R -e "devtools::install_github('GreenleafLab/ArchR', ref='release_1.0.2', repos = BiocManager::repositories())"
-RUN R -e "ArchR::installExtraPackages()"
-RUN R -e "install.packages('hexbin')"
-RUN R -e "install.packages('ggpubr')"
-RUN R -e "BiocManager::install('grimbough/rhdf5', ref = 'file_lock_issues')"
-
 ## CIPR
 RUN R -e "devtools::install_github('atakanekiz/CIPR-Package', build_vignettes = F)"
 
 ## UPDATED DT
 RUN R -e "remotes::install_github('rstudio/DT')"
 
-## UPDATED rhfd5
-RUN R -e "BiocManager::install('rhdf5')"
-
 ## reactable
 RUN R -e "devtools::install_github('glin/reactable')"
 
-## magick (archr error fix)
-RUN R -e "install.packages('magick')"
 
 ## cellchat
 RUN R -e "devtools::install_github('sqjin/CellChat')"
@@ -139,4 +126,27 @@ RUN R -e "BiocManager::install('biovizBase')"
 
 # FigR multiominc analysis 
 RUN R -e "devtools::install_github('buenrostrolab/FigR')"
+
+# Giotto multiominc analysis 
+RUN R -e "remotes::install_github('RubD/Giotto@suite')"
+RUN R -e "Giotto::installGiottoEnvironment()"
+
+# Seurat Wrapper
+RUN R - e "remotes::install_github('satijalab/seurat-wrappers')"
+
+# CellChat
+RUN R -e "devtools::install_github('sqjin/CellChat')"
+
+RUN R -e "install.packages('NMF')"
+RUN R -e "devtools::install_github('jokergoo/circlize')"
+RUN R -e "devtools::install_github('jokergoo/ComplexHeatmap')"
+
+# scCustomize
+RUN R -e "devtools::install_github('samuel-marsh/scCustomize')"
+
+# Harmony
+RUN R -e "install.packages('harmony')"
+
+# cluster profiler
+RUN R -e "BiocManager::install(c('clusterProfiler', 'org.Hs.eg.db', 'AnnotationHub', 'ReactomePA'))"
 
